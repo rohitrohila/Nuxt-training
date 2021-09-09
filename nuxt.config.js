@@ -24,6 +24,24 @@ export default {
   plugins: [
   ],
 
+  auth: {
+    strategies: {
+      local: { 
+        endpoints:{
+          login:{
+            url: 'auth/login', method:'post', propertyName: 'token'
+          },
+          user:{
+            url: 'me', method: 'get', propertyName: 'data'
+          },
+          logout:{
+            url: 'logout', method: 'get'
+          }
+        }
+      }
+    }
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -37,12 +55,16 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://jwt-auth.test/api'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS:true
   }
 }
