@@ -12,11 +12,7 @@
     </div>
         <div class="form-group col-md-6">
       <label for="firstName">First Name</label>
-      <input v-model="form.firstName" type="text" class="form-control" id="fname" placeholder="First name">
-    </div>
-        <div class="form-group col-md-6">
-      <label for="lastName">Last Name</label>
-      <input v-model="form.lastName" type="text" class="form-control" id="lname" placeholder="Last name">
+      <input v-model="form.name" type="text" class="form-control" id="fname" placeholder="First name">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password</label>
@@ -35,8 +31,7 @@ export default {
   data(){
     return{
       form:{
-        firstName:'',
-        lastName:'',
+        name:'',
         email:'',
         password:''
       }
@@ -45,7 +40,9 @@ export default {
   methods:{
     async register(){
       console.log('a')
-      await this.$axios.post('/auth/register',this.form);
+      await this.$axios.post('register',this.form).then((data)=>{
+        console.log(data)
+      })
 
       this.$auth.login({data:this.form})
       this.$router.push({name:'index'})
